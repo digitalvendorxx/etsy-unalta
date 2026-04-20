@@ -1,0 +1,19 @@
+{
+  "mockup": {
+    "x": 280,
+    "y": 350,
+    "width": 400,
+    "height": 500
+  },
+  "keepPhotoIndexes": [],
+  "keepPhotoCount": 6,
+  "operaPath": "C:/path/to/your/browser.exe",
+  "cdpPort": 9333,
+  "userDataDir": "",
+  "brand": {
+    "name": "Etsy Product Creator",
+    "primary": "#f59e0b",
+    "accent": "#a78bfa",
+    "logoUrl": ""
+  }
+}

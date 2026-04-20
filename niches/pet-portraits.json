@@ -1,0 +1,18 @@
+{
+  "category": "custom pet portraits (dogs, cats, horses)",
+  "style": "watercolor, whimsical, pastel palette, soft edges, hand-painted look",
+  "targetAudience": "pet owners buying custom gifts for themselves or loved ones",
+  "priceHint": "$25-$55",
+  "keywordSeed": [
+    "custom pet portrait",
+    "watercolor pet art",
+    "pet memorial gift",
+    "dog portrait",
+    "cat portrait",
+    "pet mom gift",
+    "personalized pet"
+  ],
+  "bannedWords": ["disney", "pixar", "marvel"],
+  "designPromptExtra": "Focus on the pet's face and personality. Do NOT include text or logos. Clean white background for print.",
+  "descriptionVoice": "warm, emotional, gift-focused, mentions memorializing beloved pets"
+}

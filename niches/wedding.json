@@ -1,0 +1,18 @@
+{
+  "category": "wedding stationery and bridal party gifts",
+  "style": "elegant script typography, soft florals, gold/blush/ivory palette, minimalist classic look",
+  "targetAudience": "brides, wedding planners, bridal shower hosts, bridesmaid gift buyers",
+  "priceHint": "$20-$75",
+  "keywordSeed": [
+    "bridesmaid gift",
+    "wedding stationery",
+    "bride to be",
+    "bachelorette party",
+    "wedding shower gift",
+    "bridal party",
+    "mother of the bride"
+  ],
+  "bannedWords": ["comfort colors", "disney"],
+  "designPromptExtra": "Elegant wedding aesthetic. Script fonts allowed. Soft romantic palette.",
+  "descriptionVoice": "romantic, refined, celebratory, emphasizes keepsake quality"
+}

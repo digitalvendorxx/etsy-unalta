@@ -1,0 +1,18 @@
+{
+  "category": "boho home decor prints and wall art",
+  "style": "earthy tones (terracotta, sage, cream), botanical illustrations, minimalist line art, neutral palette, natural textures",
+  "targetAudience": "home decor enthusiasts, boho/mid-century style fans, housewarming gift buyers",
+  "priceHint": "$15-$45",
+  "keywordSeed": [
+    "boho wall art",
+    "botanical print",
+    "earthy home decor",
+    "minimalist line art",
+    "neutral wall print",
+    "sage green art",
+    "terracotta print"
+  ],
+  "bannedWords": ["comfort colors", "ikea", "west elm"],
+  "designPromptExtra": "Earthy color palette only. No bright primary colors. Suitable for printable wall art downloads.",
+  "descriptionVoice": "calm, inviting, lifestyle-focused, highlights room-fit and palette"
+}

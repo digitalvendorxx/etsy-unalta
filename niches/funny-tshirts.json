@@ -1,0 +1,18 @@
+{
+  "category": "funny graphic t-shirts",
+  "style": "bold retro typography, vintage distressed texture, humorous illustrations, high-contrast colors on light shirts",
+  "targetAudience": "gift buyers, humor lovers, office gift-givers, dad/mom joke fans",
+  "priceHint": "$18-$28",
+  "keywordSeed": [
+    "funny shirt",
+    "sarcastic tee",
+    "meme shirt",
+    "dad joke shirt",
+    "gag gift tee",
+    "retro funny shirt",
+    "snarky tshirt"
+  ],
+  "bannedWords": ["comfort colors", "disney", "nike", "adidas", "marvel", "dc comics"],
+  "designPromptExtra": "Bold text-driven design, DTF print ready, high contrast, no copyrighted characters or brand names.",
+  "descriptionVoice": "playful, punchy, self-aware humor, short sentences"
+}

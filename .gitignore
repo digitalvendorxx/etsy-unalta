@@ -1,0 +1,25 @@
+node_modules/
+.env
+config.json
+mockup-positions.json
+
+# Personal data
+designs/
+mockups/
+output/
+uploads/
+templates/
+data/
+logs/
+server.log
+
+# Debug/test with personal data
+debug-*.js
+test-*.js
+
+# Backups
+*.backup*
+.js-backup*
+
+# IDE
+.claude/
