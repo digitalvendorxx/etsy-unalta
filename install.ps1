@@ -127,10 +127,41 @@ if (-not (Test-Path "config.json")) {
     }
 }
 
-# 9. .env
-if (-not (Test-Path ".env")) {
-    Copy-Item ".env.example" ".env"
-    Write-Host "   .env olusturuldu (bos, key'leri doldur)"
+# 9. .env - interaktif key doldurma
+$envPath = Join-Path $TARGET ".env"
+$envHasPlaceholder = $false
+if (Test-Path $envPath) {
+    $envContent = Get-Content $envPath -Raw
+    if ($envContent -match "your_" -or $envContent -match "^\s*GEMINI_API_KEY\s*=\s*$") {
+        $envHasPlaceholder = $true
+    }
+} else {
+    Copy-Item ".env.example" $envPath
+    $envHasPlaceholder = $true
+}
+
+if ($envHasPlaceholder) {
+    Write-Host ""
+    Write-Host "=== API Key girisi ===" -ForegroundColor Cyan
+    Write-Host "Bos birakirsan .env'i sonradan elle doldurmalisin."
+    Write-Host ""
+
+    $gemini = Read-Host "GEMINI_API_KEY (Google Gemini / Imagen)"
+    $wiro = Read-Host "WIRO_API_KEY (alternatif, bos birak gecer)"
+    $openrouter = Read-Host "OPENROUTER_API_KEY (SEO/tags icin)"
+
+    $envLines = @()
+    if ($gemini)     { $envLines += "GEMINI_API_KEY=$gemini" }     else { $envLines += "GEMINI_API_KEY=your_gemini_api_key_here" }
+    if ($wiro)       { $envLines += "WIRO_API_KEY=$wiro" }         else { $envLines += "WIRO_API_KEY=your_wiro_api_key_here" }
+    if ($openrouter) { $envLines += "OPENROUTER_API_KEY=$openrouter" } else { $envLines += "OPENROUTER_API_KEY=your_openrouter_api_key_here" }
+    $envLines += "PORT=3000"
+
+    $envLines -join "`r`n" | Set-Content -Encoding UTF8 $envPath
+    Write-Host "   .env yazildi" -ForegroundColor Green
+
+    if (-not $gemini -or -not $openrouter) {
+        Write-Host "   UYARI: Eksik key var, server calismayabilir. Sonra notepad ile ac: $envPath" -ForegroundColor Yellow
+    }
 }
 
 # 10. Kisayol bat dosyalari
@@ -168,19 +199,33 @@ Write-Host ""
 Write-Host "=== KURULUM TAMAM ===" -ForegroundColor Green
 Write-Host "Klasor: $TARGET"
 Write-Host ""
-Write-Host "SIRAYLA:"
-Write-Host "  1. Notepad ile ac ve API key'leri doldur:"
-Write-Host "       $TARGET\.env"
-Write-Host "     ( GEMINI_API_KEY / WIRO_API_KEY + OPENROUTER_API_KEY )"
-Write-Host ""
-Write-Host "  2. CDP browser ac (bir kere login icin):"
-Write-Host "       Masaustu > 'Etsy Creator - Browser' cift tikla"
-Write-Host "     VEYA:  cd $TARGET ; .\start-browser.bat"
-Write-Host "     Acilan pencerede etsy.com + pinterest.com login ol."
-Write-Host "     Bu pencere arka planda acik kalmali."
-Write-Host ""
-Write-Host "  3. Server baslat (ayri PowerShell):"
-Write-Host "       Masaustu > 'Etsy Creator - Server' cift tikla"
-Write-Host "     VEYA:  cd $TARGET ; .\start.bat"
-Write-Host ""
-Write-Host "  4. Tarayicida: http://localhost:3000"
+
+# 12. Auto-launch prompt
+$launch = Read-Host "Simdi baslatayim mi? (browser + server + tarayici) [E/h]"
+if ($launch -eq "" -or $launch -match "^[eEyY]") {
+
+    Write-Host ">> Browser aciliyor (CDP Chrome)..." -ForegroundColor Yellow
+    Start-Process -FilePath (Join-Path $TARGET "start-browser.bat") -WorkingDirectory $TARGET
+
+    Write-Host "   Acilan pencerede etsy.com + pinterest.com login ol." -ForegroundColor Cyan
+    Write-Host "   (pencereyi KAPATMA, arka planda kalmali)"
+    Write-Host ""
+    Read-Host "Login bitince ENTER'a bas (server baslayacak)"
+
+    Write-Host ">> Server baslatiliyor..." -ForegroundColor Yellow
+    Start-Process -FilePath (Join-Path $TARGET "start.bat") -WorkingDirectory $TARGET
+
+    Start-Sleep -Seconds 5
+    Write-Host ">> Tarayici aciliyor..." -ForegroundColor Yellow
+    Start-Process "http://localhost:3000"
+
+    Write-Host ""
+    Write-Host "HAZIR. http://localhost:3000" -ForegroundColor Green
+    Write-Host "Sonraki aciliistra: masaustu kisayollari (Browser -> Server)."
+} else {
+    Write-Host ""
+    Write-Host "MANUEL BASLATMA:"
+    Write-Host "  1. Masaustu > 'Etsy Creator - Browser' (etsy+pinterest login)"
+    Write-Host "  2. Masaustu > 'Etsy Creator - Server'"
+    Write-Host "  3. http://localhost:3000"
+}
