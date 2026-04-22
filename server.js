@@ -14,6 +14,7 @@ const { pinToPinterestWithCookies } = require('./lib/pin-to-pinterest-cookies');
 const { execFile } = require('child_process');
 const providers = require('./lib/providers');
 const niche = require('./lib/niche');
+const { generateLifestyleMockups } = require('./lib/lifestyle-mockup');
 
 // Prevent server crash on unhandled promise rejections
 process.on('unhandledRejection', (err) => {
@@ -142,7 +143,8 @@ app.post('/api/cdp-launch', (req, res) => {
   if (!browserPath || !fs.existsSync(browserPath)) {
     return res.status(400).json({ error: 'Tarayici yolu bulunamadi: ' + browserPath });
   }
-  const args = [`--remote-debugging-port=${port}`, '--restore-last-session'];
+  const userDataDir = config.userDataDir || path.join(require('os').homedir(), '.etsy-unalta-cdp');
+  const args = [`--remote-debugging-port=${port}`, `--user-data-dir=${userDataDir}`, '--restore-last-session'];
   execFile(browserPath, args, { detached: true, stdio: 'ignore' }).unref();
   // Wait a bit and check if it started
   setTimeout(async () => {
@@ -154,6 +156,161 @@ app.post('/api/cdp-launch', (req, res) => {
       res.json({ ok: true, message: 'Baslatildi, baglanti bekleniyor...', port });
     }
   }, 3000);
+});
+
+// ── Lifestyle Mockup (new simplified flow) ──
+app.post('/api/lifestyle-mockup',
+  upload.array('product', 10),
+  async (req, res) => {
+    req.setTimeout(0);
+    res.setTimeout(0);
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
+    });
+    const send = (data) => {
+      console.log('[lifestyle-mockup] send:', JSON.stringify(data).slice(0, 200));
+      res.write(`data: ${JSON.stringify(data)}\n\n`);
+    };
+    const keepalive = setInterval(() => res.write(': keepalive\n\n'), 15000);
+    res.on('close', () => clearInterval(keepalive));
+
+    const productFiles = req.files || [];
+    const description = (req.body.description || '').trim();
+    const countRaw = parseInt(req.body.count, 10);
+    const count = Math.min(Math.max(Number.isFinite(countRaw) ? countRaw : 10, 1), 20);
+
+    if (productFiles.length === 0) { send({ type: 'error', message: 'Ürün fotoğrafı eksik' }); return res.end(); }
+    if (!description) { send({ type: 'error', message: 'Ürün açıklaması eksik' }); return res.end(); }
+
+    const sku = (req.body.sku || `LS${Date.now()}`).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 32) || `LS${Date.now()}`;
+    const productPaths = productFiles.map(f => renameWithExt(f));
+
+    const competitorUrl = (req.body.competitorUrl || '').toString().trim();
+
+    send({ type: 'sku', sku });
+    send({ type: 'log', message: `Ürün: ${description} | ${productPaths.length} foto | ${count} mockup üretilecek` });
+
+    try {
+      const { outputs, concepts } = await generateLifestyleMockups({
+        productImagePaths: productPaths,
+        productDescription: description,
+        sku,
+        count,
+        onProgress: send,
+      });
+
+      // Auto-scrape tags/title/description from competitor if URL provided
+      let scraped = null;
+      if (competitorUrl && /^https?:\/\//.test(competitorUrl)) {
+        send({ type: 'step-start', step: 'tags', message: 'Rakipten etiket çekiliyor...' });
+        try {
+          const cdpReady = await isCdpAvailable();
+          if (!cdpReady) throw new Error('CDP açık değil');
+          const result = await scrapeTags(competitorUrl);
+          const tags = (result?.tags || []).slice(0, 13);
+          const title = result?.title || '';
+          const desc = result?.description || '';
+          scraped = { tags, title, description: desc };
+          if (tags.length) send({ type: 'tags', tags });
+          if (title) send({ type: 'title', title });
+          if (desc) send({ type: 'description', description: desc });
+          send({ type: 'step-done', step: 'tags', message: `${tags.length} etiket + başlık hazır` });
+        } catch (err) {
+          console.error('[lifestyle-mockup] scrape error:', err);
+          send({ type: 'step-error', step: 'tags', message: 'Rakipten çekilemedi: ' + err.message });
+        }
+      }
+
+      send({ type: 'done', sku, mockups: outputs, concepts, count: outputs.length, scraped });
+    } catch (err) {
+      console.error('[lifestyle-mockup] error:', err);
+      send({ type: 'error', message: err.message || String(err) });
+    } finally {
+      productPaths.forEach(p => { try { fs.unlinkSync(p); } catch {} });
+      res.end();
+    }
+  }
+);
+
+// ── Scrape competitor tags (standalone) ──
+app.post('/api/scrape-competitor-tags', async (req, res) => {
+  try {
+    const url = (req.body.url || '').toString().trim();
+    if (!url || !/^https?:\/\//.test(url)) {
+      return res.status(400).json({ error: 'Geçerli bir URL gerekli' });
+    }
+    const cdpReady = await isCdpAvailable();
+    if (!cdpReady) return res.status(400).json({ error: 'CDP açık değil — tarayıcıyı başlatın' });
+    const result = await scrapeTags(url);
+    const tags = (result?.tags || []).slice(0, 13);
+    const title = result?.title || '';
+    let seoTitle = '';
+    try { seoTitle = await generateSEOTitle(title, tags); } catch {}
+    res.json({ tags, title, seoTitle });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── Lifestyle Upload (Etsy) — continuation after lifestyle mockup flow ──
+app.post('/api/lifestyle-upload', async (req, res) => {
+  req.setTimeout(0);
+  res.setTimeout(0);
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+  });
+  const send = (data) => {
+    console.log('[lifestyle-upload] send:', JSON.stringify(data).slice(0, 200));
+    res.write(`data: ${JSON.stringify(data)}\n\n`);
+  };
+  const keepalive = setInterval(() => res.write(': keepalive\n\n'), 15000);
+  res.on('close', () => clearInterval(keepalive));
+
+  try {
+    const sku = (req.body.sku || `LS${Date.now()}`).toString();
+    const title = (req.body.title || '').toString().trim();
+    const description = (req.body.description || '').toString().trim();
+    const tagsRaw = (req.body.tags || '').toString();
+    const mockupsRaw = (req.body.mockups || '').toString();
+
+    const tags = tagsRaw.split(',').map(t => t.trim()).filter(Boolean);
+    const mockupRel = mockupsRaw.split(',').map(p => p.trim()).filter(Boolean);
+    const mockupPaths = mockupRel.map(p => path.join(__dirname, p.replace(/^\//, '')));
+
+    if (!title) { send({ type: 'error', message: 'Başlık eksik' }); return res.end(); }
+    if (tags.length === 0) { send({ type: 'error', message: 'Etiket eksik' }); return res.end(); }
+    if (mockupPaths.length === 0) { send({ type: 'error', message: 'Mockup bulunamadı' }); return res.end(); }
+
+    send({ type: 'step-start', step: 'upload', message: 'Etsy\'ye yükleniyor...' });
+
+    const cdpReady = await isCdpAvailable();
+    let result;
+    if (cdpReady) {
+      result = await uploadToEtsy({ sku, mockupPaths, tags, title, description });
+    } else if (loadCookies().etsy) {
+      result = await uploadToEtsyWithCookies({ sku, mockupPaths, tags, title, description, etsyCookies: loadCookies().etsy });
+    } else {
+      throw new Error('Etsy hesabı bağlı değil. CDP başlat veya cookie ekle.');
+    }
+
+    const listingUrl = result.listingUrl || '';
+    if (!listingUrl || !listingUrl.includes('etsy.com')) {
+      send({ type: 'step-error', step: 'upload', message: 'Etsy yükleme doğrulanamadı — listing URL alınamadı' });
+    } else {
+      send({ type: 'step-done', step: 'upload', message: 'Etsy\'ye yüklendi' });
+      send({ type: 'listingUrl', url: listingUrl });
+    }
+    send({ type: 'done', listingUrl });
+  } catch (err) {
+    console.error('[lifestyle-upload] error:', err);
+    send({ type: 'error', message: err.message || String(err) });
+  } finally {
+    res.end();
+  }
 });
 
 // ── Mockup Library ──
@@ -1053,7 +1210,7 @@ app.get('/api/setup/status', async (req, res) => {
   const openrouterOk = !isPlaceholder(env.OPENROUTER_API_KEY);
   const templateIdOk = !!(cfg.etsyTemplateListingId && /^\d{6,15}$/.test(String(cfg.etsyTemplateListingId).trim()));
 
-  const ready = wiroOk && openrouterOk && chromeOk && templateIdOk;
+  const ready = openrouterOk && chromeOk && templateIdOk;
   res.json({
     ready,
     checks: {
@@ -1342,6 +1499,8 @@ app.post('/api/setup/detect-chrome', (req, res) => {
     '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
     '/Applications/Opera GX.app/Contents/MacOS/Opera',
   ] : os === 'win32' ? [
+    `${process.env.LOCALAPPDATA || ''}\\Programs\\Opera GX\\opera.exe`,
+    `${process.env.USERPROFILE || ''}\\AppData\\Local\\Programs\\Opera GX\\opera.exe`,
     'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
     'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
     'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe',

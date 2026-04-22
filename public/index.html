@@ -2259,18 +2259,13 @@ input[type="number"]:focus, input[type="url"]:focus, textarea:focus, select:focu
 
     <div class="sidebar-label">Modlar</div>
     <button class="sidebar-item" data-mode="single" onclick="selectMode('single');updateSidebar('single')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-      Tek Tasarım
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Tek
       <span class="item-dot" style="background:var(--amber)"></span>
     </button>
-    <button class="sidebar-item" data-mode="front-back" onclick="selectMode('front-back');updateSidebar('front-back')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M12 3v18"/></svg>
-      On-Arka
-      <span class="item-dot" style="background:var(--green)"></span>
-    </button>
-    <button class="sidebar-item" data-mode="copyrighted" onclick="selectMode('copyrighted');updateSidebar('copyrighted')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      Telifli
+    <button class="sidebar-item" data-mode="bulk" onclick="selectMode('bulk');updateSidebar('bulk')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
+      Çoklu
       <span class="item-dot" style="background:var(--purple)"></span>
     </button>
     <div class="sidebar-divider"></div>
@@ -2318,24 +2313,17 @@ input[type="number"]:focus, input[type="url"]:focus, textarea:focus, select:focu
 
       <div class="mode-grid">
         <div class="mode-card" data-mode="single" onclick="selectMode('single');updateSidebar('single')">
-          <div class="mode-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-          <div class="mode-title">Tek Tasarım</div>
-          <div class="mode-desc">Bir tasarım yükle, mockup oluştur, Etsy'ye yükle</div>
-          <span class="mode-badge badge-default">Standart</span>
+          <div class="mode-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          <div class="mode-title">Tek</div>
+          <div class="mode-desc">Tek ürün fotoğrafı yükle, ürün türünü yaz → ürüne özel 10 farklı açıda 1:1 lifestyle mockup</div>
+          <span class="mode-badge badge-default">Lifestyle Mockup</span>
         </div>
 
-        <div class="mode-card" data-mode="front-back" onclick="selectMode('front-back');updateSidebar('front-back')">
-          <div class="mode-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M12 3v18"/></svg></div>
-          <div class="mode-title">Ön-Arka Tasarım</div>
-          <div class="mode-desc">Ön + arka tasarımı tek mockup'a yerleştir</div>
-          <span class="mode-badge badge-dual">Çift Yüz</span>
-        </div>
-
-        <div class="mode-card" data-mode="copyrighted" onclick="selectMode('copyrighted');updateSidebar('copyrighted')">
-          <div class="mode-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-          <div class="mode-title">Telifli Tasarım</div>
-          <div class="mode-desc">Telif içeriklerden esinlenerek yeni tasarım oluştur</div>
-          <span class="mode-badge badge-flux">Flux AI</span>
+        <div class="mode-card" data-mode="bulk" onclick="selectMode('bulk');updateSidebar('bulk')">
+          <div class="mode-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></div>
+          <div class="mode-title">Çoklu</div>
+          <div class="mode-desc">Birden fazla ürünü sırayla işle — her biri için ayrı fotoğraf + açıklama, her birinden 10 mockup</div>
+          <span class="mode-badge badge-dual">Toplu İşlem</span>
         </div>
 
       </div>
@@ -2358,139 +2346,72 @@ input[type="number"]:focus, input[type="url"]:focus, textarea:focus, select:focu
       <form id="createForm" class="form-grid">
         <input type="hidden" id="modeInput" name="mode" value="single">
 
-        <div class="form-section">
-          <div class="form-section-label">Tasarım Görseli</div>
-
-          <div id="zone-single">
-            <div class="field-label" id="refLabel">Tasarım Görseli</div>
+        <!-- ═══ TEK MOD ═══ -->
+        <div id="singlePanel">
+          <div class="form-section">
+            <div class="form-section-label">Ürün Fotoğrafı <span style="font-weight:300;opacity:0.5">(birden fazla ekleyebilirsin — hepsi referans olarak kullanılır)</span></div>
             <div class="drop-zone" id="refDrop">
-              <input type="file" id="refFile" accept="image/*">
+              <input type="file" id="refFile" accept="image/*" multiple>
               <div class="dz-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-              <div class="dz-label">Görsel sürükle veya tıkla</div>
+              <div class="dz-label">Ürün fotoğraflarını sürükle veya tıkla</div>
               <div class="dz-files" id="refFiles"></div>
             </div>
           </div>
 
-          <div id="zone-frontback" style="display:none">
-            <div class="drop-grid">
+          <div class="form-section">
+            <div class="form-section-label">Ürün Açıklaması</div>
+            <div class="field-label">Ürün ne? <span style="font-weight:300;opacity:0.35">(AI bu metinden ürüne özel 10 farklı açıda sahne üretir)</span></div>
+            <textarea id="productDesc" placeholder="Örn: duvara asılan kedi temalı kanvas tablo / şömine üstü ahşap süs / keramik kahve kupası" rows="3"></textarea>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-label">Detaylar</div>
+            <div class="row">
               <div>
-                <div class="field-label">Ön Tasarım</div>
-                <div class="drop-zone" id="frontDrop">
-                  <input type="file" id="frontFile" accept="image/*">
-                  <div class="dz-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
-                  <div class="dz-label">On yuz görseli</div>
-                  <div class="dz-files" id="frontFiles"></div>
-                </div>
+                <div class="field-label">SKU <span style="font-weight:300;opacity:0.35">(opsiyonel)</span></div>
+                <input type="text" id="sku" placeholder="Otomatik oluşturulur">
               </div>
               <div>
-                <div class="field-label">Arka Tasarım</div>
-                <div class="drop-zone" id="backDrop">
-                  <input type="file" id="backFile" accept="image/*">
-                  <div class="dz-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6"/></svg></div>
-                  <div class="dz-label">Arka yuz görseli</div>
-                  <div class="dz-files" id="backFiles"></div>
-                </div>
+                <div class="field-label">Mockup Sayısı</div>
+                <input type="number" id="mockupCount" value="10" min="1" max="20">
               </div>
             </div>
-          </div>
-
-        </div>
-
-        <div class="form-section">
-          <div class="form-section-label">Mockup Şablonlari</div>
-          <div class="mockup-library">
-            <div class="mockup-library-header">
-              <span>Kütüphaneden Sec</span>
-              <label>+ Yükle<input type="file" id="libUploadInput" accept="image/*" multiple onchange="uploadToLibrary(this.files)"></label>
-            </div>
-            <div class="lib-grid" id="libGrid"></div>
-            <div class="lib-empty" id="libEmpty">Kütüphane boş. "Yükle" ile mockup ekleyin.</div>
-          </div>
-          <div class="drop-zone" id="mockupDrop">
-            <input type="file" id="mockupFiles" accept="image/*" multiple>
-            <div class="dz-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-            <div class="dz-label">veya dosya yükle / surukle (coklu)</div>
-            <div class="dz-files" id="mockupFilesList"></div>
-          </div>
-        </div>
-
-        <div id="promptSection" class="form-section" style="display:none">
-          <div class="form-section-label">Flux AI Prompt</div>
-          <div class="field-label">Tasarım Talimatı <span style="font-weight:300;opacity:0.35">(opsiyonel)</span></div>
-          <textarea id="prompt" placeholder="Flux AI'ya tasarım talimati verin..."></textarea>
-        </div>
-
-        <div class="form-section">
-          <div class="form-section-label">Detaylar</div>
-          <div class="row">
-            <div>
-              <div class="field-label">SKU <span style="font-weight:300;opacity:0.35">(opsiyonel)</span></div>
-              <input type="text" id="sku" placeholder="Otomatik oluşturulur">
-            </div>
-            <div>
-              <div class="field-label">Rakip Etsy URL</div>
-              <input type="url" id="competitor" placeholder="https://www.etsy.com/listing/..." value="https://www.etsy.com/listing/4456120451">
+            <div style="margin-top:0.75rem;">
+              <div class="field-label">Rakip Etsy Link <span style="font-weight:300;opacity:0.35">(opsiyonel — etiketleri buradan çeker)</span></div>
+              <input type="text" id="competitorUrl" placeholder="https://www.etsy.com/listing/...">
             </div>
           </div>
         </div>
 
-        <div class="checkbox-row">
-          <label><input type="checkbox" id="fullAuto"> Full Otomasyon</label>
-          <label><input type="checkbox" id="skipTags"> Etiket cekmeyi atla</label>
+        <!-- ═══ ÇOKLU MOD ═══ -->
+        <div id="bulkPanel" style="display:none">
+          <div class="form-section">
+            <div class="form-section-label" style="display:flex;justify-content:space-between;align-items:center;">
+              <span>Ürünler</span>
+              <div style="display:flex;gap:0.5rem;align-items:center;">
+                <span style="font-size:0.7rem;opacity:0.6">Ürün başına mockup:</span>
+                <input type="number" id="bulkMockupCount" value="10" min="1" max="20" style="width:70px">
+                <button type="button" class="btn-sm" id="btnAddBulk">+ Ürün Ekle</button>
+              </div>
+            </div>
+            <div id="bulkItems"></div>
+          </div>
         </div>
 
-        <button type="submit" class="btn-primary btn-amber" id="btnCreate">Ürün Oluştur</button>
+        <button type="submit" class="btn-primary btn-amber" id="btnCreate">Mockup Üret</button>
       </form>
 
-      <div id="progress-section">
+      <div id="progress-section" style="display:none">
         <div class="pipeline-header">
-          <span class="pipeline-label">Pipeline</span>
-          <div style="display:flex;align-items:center;gap:0.5rem;margin-left:auto;">
-            <button class="btn-sm" id="btnCancel" onclick="cancelPipeline()" style="display:none;">İptal</button>
-            <button class="btn-sm" id="btnRestart" onclick="restartPipeline()" style="display:none;">Baştan Başla</button>
-            <span class="pipeline-pct" id="pipelinePct">0%</span>
-          </div>
+          <span class="pipeline-label" id="pipelineLabel">İşleniyor</span>
+          <span class="pipeline-pct" id="pipelinePct" style="margin-left:auto;">0%</span>
         </div>
         <div class="progress-track">
           <div class="progress-fill" id="progressBar"></div>
         </div>
-        <div class="steps" id="steps"></div>
       </div>
 
-      <div id="results-section">
-        <div class="results-block">
-          <div class="results-block-header">
-            <div class="results-block-icon" style="background:var(--amber-dim);color:var(--amber)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-            <span class="results-block-title">Tasarım</span>
-          </div>
-          <div class="image-grid" id="designGrid"></div>
-        </div>
-
-        <div class="results-block" id="mockupBlock">
-          <div class="results-block-header">
-            <div class="results-block-icon" style="background:var(--purple-dim);color:var(--purple)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-            <span class="results-block-title">Mockup'lar</span>
-            <span class="results-block-count" id="mockupCount"></span>
-            <button class="btn-sm" onclick="downloadAllMockups()" style="margin-left:auto;font-size:0.65rem;padding:0.25rem 0.6rem" title="Tum mockup'lari indir">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:3px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              İndir
-            </button>
-          </div>
-          <div class="image-grid" id="mockupGrid"></div>
-        </div>
-
-        <div id="tagsResult" class="results-block" style="display:none">
-          <div class="results-block-header">
-            <div class="results-block-icon" style="background:var(--green-dim);color:var(--green)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
-            <span class="results-block-title">Etiketler</span>
-            <span class="results-block-count" id="tagCount"></span>
-          </div>
-          <div class="tags-container" id="tagsList"></div>
-        </div>
-
-        <div id="editPanel" style="display:none"></div>
-        <div id="continueWrap" style="display:none"></div>
-      </div>
+      <div id="results-section"></div>
 
       <div id="log-section">
         <details>
@@ -2572,8 +2493,8 @@ input[type="number"]:focus, input[type="url"]:focus, textarea:focus, select:focu
         <div class="wizard-step-row">
           <span class="wizard-step-num" id="wizNumEtsy">3</span>
           <div>
-            <div class="wizard-step-title">Etsy Şablonu &amp; Ürün Tipi</div>
-            <div class="wizard-step-desc">Şablon listing ID yeni ürünleri hızlı kopyalamak için. Ürün tipi mockup yerleşimini ayarlar.</div>
+            <div class="wizard-step-title">Etsy Şablonu</div>
+            <div class="wizard-step-desc">Şablon listing ID yeni ürünleri hızlı kopyalamak için.</div>
           </div>
           <span class="wizard-step-status" id="wizStatusEtsy">bekliyor</span>
         </div>
@@ -2585,32 +2506,6 @@ input[type="number"]:focus, input[type="url"]:focus, textarea:focus, select:focu
           <input type="text" id="wizTemplateId" placeholder="ornek: 1234567890" inputmode="numeric" spellcheck="false">
           <div class="wizard-hint">Etsy → Listings → bir şablonu aç → URL'deki sayı (ör. /listing/<b>1234567890</b>).</div>
 
-          <label class="wizard-label" style="margin-top:16px;">
-            <span>Ürün Tipi</span>
-            <a href="#" onclick="event.preventDefault();toggleCustomTypeForm();">+ Özel tip ekle</a>
-          </label>
-          <div class="product-type-grid" id="wizProductGrid"></div>
-          <div id="customTypeForm" style="display:none; margin-top:12px; padding:14px; background:rgba(5,5,7,0.4); border:1px solid var(--hair); border-radius:10px;">
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-              <div>
-                <label class="wizard-label"><span>Tip adı</span></label>
-                <input type="text" id="customTypeLabel" placeholder="ör: Kedi tasması">
-              </div>
-              <div>
-                <label class="wizard-label"><span>Anahtar (slug)</span></label>
-                <input type="text" id="customTypeKey" placeholder="ör: kedi-tasmasi" style="font-family:var(--mono); font-size:12px;">
-              </div>
-            </div>
-            <label class="wizard-label" style="margin-top:10px;"><span>AI yerleşim ipucu (İngilizce, opsiyonel)</span></label>
-            <input type="text" id="customTypeHint" placeholder="ör: front face of pet collar, flat surface">
-            <div class="wizard-hint">Boş bırakırsan AI ürün tipi adından kendisi çıkarır.</div>
-            <div class="wizard-actions">
-              <button class="btn-wizard-primary" onclick="addCustomType()">Ekle</button>
-              <button class="btn-wizard-ghost" onclick="toggleCustomTypeForm()">Vazgeç</button>
-              <span class="wizard-saved" id="customTypeMsg"></span>
-            </div>
-          </div>
-
           <div class="wizard-actions">
             <button class="btn-wizard-primary" onclick="saveWizardEtsy()">Kaydet</button>
             <span class="wizard-saved" id="wizEtsyMsg"></span>
@@ -2618,32 +2513,6 @@ input[type="number"]:focus, input[type="url"]:focus, textarea:focus, select:focu
         </div>
       </div>
 
-      <!-- Step 3: Login -->
-      <div class="wizard-card" id="wizStepLogin">
-        <div class="wizard-step-row">
-          <span class="wizard-step-num" id="wizNumLogin">4</span>
-          <div>
-            <div class="wizard-step-title">Etsy &amp; Pinterest Girişi</div>
-            <div class="wizard-step-desc">Açılan Chrome penceresinde etsy.com ve pinterest.com'a giriş yap. Bir kez yeterli — oturum kalıcı.</div>
-          </div>
-          <span class="wizard-step-status" id="wizStatusLogin">bekliyor</span>
-        </div>
-        <div class="wizard-step-body">
-          <div class="wizard-login-grid">
-            <div class="wizard-login-item">
-              <div class="wizard-login-label">Etsy</div>
-              <div class="wizard-login-state" id="wizEtsyState">giriş yapılmadı</div>
-            </div>
-            <div class="wizard-login-item">
-              <div class="wizard-login-label">Pinterest</div>
-              <div class="wizard-login-state" id="wizPinState">giriş yapılmadı</div>
-            </div>
-          </div>
-          <div class="wizard-actions">
-            <button class="btn-wizard-ghost" onclick="refreshWizardStatus()">Durumu Yenile</button>
-          </div>
-        </div>
-      </div>
 
       <!-- Summary -->
       <div class="wizard-summary" id="wizSummary">
@@ -2825,12 +2694,7 @@ window.updateSidebar = function(mode) {
     } else if (name === 'form') {
       nav.innerHTML = `
         <button class="toolbar-nav-btn" onclick="goBack()">Dashboard</button>
-        <button class="toolbar-nav-btn active">${currentMode === 'single' ? 'Tek Tasarım' : currentMode === 'front-back' ? 'Ön-Arka' : currentMode === 'product-mockup' ? 'Ürün Mockup' : 'Telifli'}</button>
-      `;
-    } else if (name === 'bulk') {
-      nav.innerHTML = `
-        <button class="toolbar-nav-btn" onclick="goBack()">Dashboard</button>
-        <button class="toolbar-nav-btn active">Toplu</button>
+        <button class="toolbar-nav-btn active">${currentMode === 'bulk' ? 'Çoklu' : 'Tek'}</button>
       `;
     }
   }
@@ -3193,64 +3057,31 @@ window.updateSidebar = function(mode) {
   }
 
   window.selectMode = function(mode) {
+    if (mode !== 'single' && mode !== 'bulk') mode = 'single';
     currentMode = mode;
-
-    if (mode === 'bulk') {
-      initBulkForm();
-      showScreen('bulk');
-      return;
-    }
-
     document.getElementById('modeInput').value = mode;
 
-    const zoneSingle = document.getElementById('zone-single');
-    const zoneFB = document.getElementById('zone-frontback');
-    const promptSection = document.getElementById('promptSection');
-    const btn = document.getElementById('btnCreate');
+    const singlePanel = document.getElementById('singlePanel');
+    const bulkPanel = document.getElementById('bulkPanel');
     const breadcrumb = document.getElementById('breadcrumbMode');
     const pill = document.getElementById('modePill');
-
-    const zoneProduct = document.getElementById('zone-product-mockup');
-    const mockupSection = document.querySelector('.form-section:has(#libGrid)') || document.getElementById('libGrid')?.closest('.form-section');
-
-    if (zoneSingle) zoneSingle.style.display = (mode === 'front-back' || mode === 'product-mockup') ? 'none' : 'block';
-    if (zoneFB) zoneFB.style.display = mode === 'front-back' ? 'block' : 'none';
-    if (zoneProduct) zoneProduct.style.display = mode === 'product-mockup' ? 'block' : 'none';
-    if (promptSection) promptSection.style.display = mode === 'copyrighted' ? 'block' : 'none';
-    if (mockupSection) mockupSection.style.display = mode === 'product-mockup' ? 'none' : '';
+    const btn = document.getElementById('btnCreate');
 
     if (mode === 'single') {
-      document.getElementById('refLabel').textContent = 'Tasarım Görseli';
-      breadcrumb.textContent = 'Tek Tasarım';
-      pill.className = 'mode-pill mp-single';
-      pill.textContent = 'STANDART';
-      btn.className = 'btn-primary btn-amber';
-      btn.textContent = 'Ürün Oluştur';
-    } else if (mode === 'front-back') {
-      breadcrumb.textContent = 'Ön-Arka Tasarım';
-      pill.className = 'mode-pill mp-frontback';
-      pill.textContent = 'ÇİFT YÜZ';
-      btn.className = 'btn-primary btn-green';
-      btn.textContent = 'Ürün Oluştur';
-    } else if (mode === 'product-mockup') {
-      breadcrumb.textContent = 'Ürün Mockup';
-      pill.className = 'mode-pill mp-product';
-      pill.textContent = 'AI MOCKUP';
-      pill.style.background = 'var(--rose-dim)';
-      pill.style.color = 'var(--rose)';
-      btn.className = 'btn-primary';
-      btn.style.background = 'var(--rose)';
-      btn.style.color = '#000';
-      btn.textContent = 'Mockup Uret';
+      if (singlePanel) singlePanel.style.display = '';
+      if (bulkPanel) bulkPanel.style.display = 'none';
+      if (breadcrumb) breadcrumb.textContent = 'Tek';
+      if (pill) { pill.className = 'mode-pill mp-single'; pill.textContent = 'LIFESTYLE'; }
+      if (btn) btn.textContent = 'Mockup Üret';
     } else {
-      document.getElementById('refLabel').textContent = 'Referans Görsel';
-      breadcrumb.textContent = 'Telifli Tasarım';
-      pill.className = 'mode-pill mp-flux';
-      pill.textContent = 'TELİFLİ';
-      btn.className = 'btn-primary btn-purple';
-      btn.textContent = 'Ürün Oluştur';
+      if (singlePanel) singlePanel.style.display = 'none';
+      if (bulkPanel) bulkPanel.style.display = '';
+      if (breadcrumb) breadcrumb.textContent = 'Çoklu';
+      if (pill) { pill.className = 'mode-pill mp-frontback'; pill.textContent = 'TOPLU'; }
+      if (btn) btn.textContent = 'Tümünü Üret';
+      ensureBulkRowMin();
     }
-
+    resetUI();
     showScreen('form');
   };
 
@@ -3313,7 +3144,7 @@ window.updateSidebar = function(mode) {
   }
 
   // Setup all drop zones
-  setupDropZone(document.getElementById('refDrop'), document.getElementById('refFile'), document.getElementById('refFiles'), false);
+  setupDropZone(document.getElementById('refDrop'), document.getElementById('refFile'), document.getElementById('refFiles'), true);
   setupDropZone(document.getElementById('frontDrop'), document.getElementById('frontFile'), document.getElementById('frontFiles'), false);
   setupDropZone(document.getElementById('backDrop'), document.getElementById('backFile'), document.getElementById('backFiles'), false);
   setupDropZone(document.getElementById('mockupDrop'), document.getElementById('mockupFiles'), document.getElementById('mockupFilesList'), true);
@@ -3325,6 +3156,7 @@ window.updateSidebar = function(mode) {
   let selectedLibraryMockups = new Set();
 
   async function loadMockupLibrary() {
+    if (!libGrid) return; // library UI removed in single-flow version
     try {
       const res = await fetch('/api/mockups');
       const files = await res.json();
@@ -3441,24 +3273,22 @@ window.updateSidebar = function(mode) {
   let mockupTemplateFiles = [];
 
   function resetUI() {
-    progressSection.classList.remove('active');
-    resultsSection.classList.remove('active');
-    logSection.classList.remove('active');
-    progressBar.style.width = '0%';
-    pipelinePct.textContent = '0%';
-    stepsEl.innerHTML = '';
-    designGrid.innerHTML = '';
-    mockupGrid.innerHTML = '';
-    tagsList.innerHTML = '';
-    tagsResult.style.display = 'none';
-    logEl.innerHTML = '';
-    document.getElementById('editPanel').style.display = 'none';
-    document.getElementById('editPanel').innerHTML = '';
-    document.getElementById('continueWrap').style.display = 'none';
-    document.getElementById('continueWrap').innerHTML = '';
-    document.getElementById('toolbarStatus').textContent = 'Ready';
-    document.getElementById('mockupCount').textContent = '';
-    document.getElementById('tagCount').textContent = '';
+    const ps = document.getElementById('progress-section');
+    const rs = document.getElementById('results-section');
+    const ls = document.getElementById('log-section');
+    const le = document.getElementById('log');
+    const bar = document.getElementById('progressBar');
+    const pct = document.getElementById('pipelinePct');
+    const lbl = document.getElementById('pipelineLabel');
+    const tbs = document.getElementById('toolbarStatus');
+    if (ps) { ps.style.display = 'none'; ps.classList.remove('active'); }
+    if (rs) { rs.style.display = 'none'; rs.classList.remove('active'); rs.innerHTML = ''; }
+    if (ls) ls.classList.remove('active');
+    if (le) le.innerHTML = '';
+    if (bar) bar.style.width = '0%';
+    if (pct) pct.textContent = '0%';
+    if (lbl) lbl.textContent = 'İşleniyor';
+    if (tbs) tbs.textContent = 'Ready';
   }
 
   function renderSteps(activeSteps) {
@@ -4763,117 +4593,653 @@ window.updateSidebar = function(mode) {
     }
   }
 
-  // ── Submit (fresh start or resume) ──
+  // ══════════════ Lifestyle draft persistence ══════════════
+  const DRAFT_KEY = 'etsy-unalta-lifestyle-draft';
+  let draftPanels = [];  // { sku, description, mockupPaths, title, tags, desc, competitorUrl }
+
+  function readDraft() {
+    try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || '{}'); } catch { return {}; }
+  }
+  function writeDraft(patch) {
+    const cur = readDraft();
+    const next = { ...cur, ...patch };
+    try { localStorage.setItem(DRAFT_KEY, JSON.stringify(next)); } catch {}
+  }
+  function saveFormDraft() {
+    writeDraft({
+      description: document.getElementById('productDesc')?.value || '',
+      sku: document.getElementById('sku')?.value || '',
+      mockupCount: document.getElementById('mockupCount')?.value || '',
+      competitorUrl: document.getElementById('competitorUrl')?.value || '',
+    });
+  }
+  function savePanelsDraft() {
+    writeDraft({ panels: draftPanels });
+  }
+
+  function bindDraftInputs() {
+    ['productDesc', 'sku', 'mockupCount', 'competitorUrl'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', saveFormDraft);
+    });
+  }
+
+  function restoreDraft() {
+    const d = readDraft();
+    if (d.description) { const el = document.getElementById('productDesc'); if (el) el.value = d.description; }
+    if (d.sku) { const el = document.getElementById('sku'); if (el) el.value = d.sku; }
+    if (d.mockupCount) { const el = document.getElementById('mockupCount'); if (el) el.value = d.mockupCount; }
+    if (d.competitorUrl) { const el = document.getElementById('competitorUrl'); if (el) el.value = d.competitorUrl; }
+
+    if (Array.isArray(d.panels) && d.panels.length > 0) {
+      draftPanels = d.panels;
+      const results = document.getElementById('results-section');
+      if (!results) return;
+      results.innerHTML = '';
+      results.style.display = 'block';
+      d.panels.forEach(p => {
+        const block = createResultsBlock(p.description || 'Taslak');
+        const grid = block.querySelector('.image-grid');
+        const countEl = block.querySelector('.results-block-count');
+        const mockupPaths = p.mockupPaths || [];
+        grid.innerHTML = '';
+        mockupPaths.forEach((path, i) => {
+          const tile = document.createElement('div');
+          tile.className = 'image-card';
+          tile.style.cssText = 'aspect-ratio:1/1;background:#000;border-radius:10px;overflow:hidden;position:relative;';
+          tile.innerHTML = `<img src="${path}" loading="lazy" alt="" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;top:6px;left:6px;background:rgba(0,0,0,0.75);color:#fff;font-size:0.6rem;padding:2px 6px;border-radius:4px;">#${i + 1}</div>`;
+          grid.appendChild(tile);
+        });
+        if (countEl) countEl.textContent = mockupPaths.length;
+        const panel = createUploadPanel({
+          sku: p.sku,
+          description: p.description,
+          mockupPaths,
+          competitorUrl: p.competitorUrl || '',
+        });
+        // Restore editable fields
+        const titleEl = panel.querySelector('[data-role=title]');
+        const tagsEl = panel.querySelector('[data-role=tags]');
+        const descEl = panel.querySelector('[data-role=description]');
+        if (titleEl && p.title != null) titleEl.value = p.title;
+        if (tagsEl && p.tags != null) tagsEl.value = p.tags;
+        if (descEl && p.desc != null) descEl.value = p.desc;
+        block.appendChild(panel);
+        results.appendChild(block);
+      });
+    }
+  }
+
+  function initDraft() { bindDraftInputs(); restoreDraft(); }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDraft);
+  } else {
+    initDraft();
+  }
+
+  // ══════════════ Lifestyle Mockup flow ══════════════
+  async function runLifestyleStream({ file, files, description, count, sku, competitorUrl, onEvent }) {
+    const fd = new FormData();
+    const fileArr = files || (file ? [file] : []);
+    fileArr.forEach(f => fd.append('product', f));
+    fd.append('description', description);
+    fd.append('count', String(count));
+    if (sku) fd.append('sku', sku);
+    if (competitorUrl) fd.append('competitorUrl', competitorUrl);
+
+    const resp = await fetch('/api/lifestyle-mockup', { method: 'POST', body: fd });
+    if (!resp.ok || !resp.body) throw new Error('Request failed: ' + resp.status);
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const parts = buf.split('\n\n');
+      buf = parts.pop();
+      for (const part of parts) {
+        const line = part.split('\n').find(l => l.startsWith('data: '));
+        if (!line) continue;
+        let d;
+        try { d = JSON.parse(line.slice(6)); } catch { continue; }
+        onEvent(d);
+      }
+    }
+  }
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+  }
+
+  function addLog(msg) {
+    const logEl = document.getElementById('log');
+    if (!logEl) return;
+    const line = document.createElement('div');
+    line.textContent = msg;
+    logEl.appendChild(line);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  function createResultsBlock(title) {
+    const block = document.createElement('div');
+    block.className = 'results-block';
+    block.innerHTML = `
+      <div class="results-block-header">
+        <div class="results-block-icon" style="background:var(--purple-dim);color:var(--purple)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        <span class="results-block-title">${escapeHtml(title)}</span>
+        <span class="results-block-count"></span>
+      </div>
+      <div class="image-grid"></div>
+    `;
+    return block;
+  }
+
+  function renderMockupTiles(gridEl, count) {
+    gridEl.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+      const d = document.createElement('div');
+      d.className = 'image-card pending-tile';
+      d.dataset.idx = i + 1;
+      d.style.cssText = 'aspect-ratio:1/1;background:repeating-linear-gradient(45deg,rgba(255,255,255,0.02) 0 10px,rgba(255,255,255,0.04) 10px 20px);border:1px solid var(--hair);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--text-dim);font-size:0.7rem;position:relative;overflow:hidden;';
+      d.innerHTML = `<span>#${i + 1} hazırlanıyor…</span>`;
+      gridEl.appendChild(d);
+    }
+  }
+
+  function updateMockupTile(gridEl, idx, state, data) {
+    const tile = gridEl.querySelector(`[data-idx="${idx}"]`);
+    if (!tile) return;
+    if (state === 'done') {
+      tile.classList.remove('pending-tile');
+      tile.style.background = '#000';
+      tile.innerHTML = `
+        <img src="${data.path}" loading="lazy" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <div style="position:absolute;top:6px;left:6px;background:rgba(0,0,0,0.75);color:#fff;font-size:0.6rem;padding:2px 6px;border-radius:4px;">#${idx}</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.85),rgba(0,0,0,0));color:#fff;padding:16px 8px 6px;font-size:0.6rem;line-height:1.3;">${escapeHtml(data.angle || '')}</div>
+      `;
+    } else if (state === 'error') {
+      tile.classList.remove('pending-tile');
+      tile.style.borderColor = 'var(--red)';
+      tile.style.color = 'var(--red)';
+      tile.innerHTML = `<div style="padding:10px;text-align:center;">#${idx} hata: ${escapeHtml(data.error || '').slice(0, 80)}</div>`;
+    }
+  }
+
+  function upsertDraftPanel(entry) {
+    if (typeof draftPanels === 'undefined') return;
+    const idx = draftPanels.findIndex(p => p.sku === entry.sku);
+    if (idx >= 0) draftPanels[idx] = { ...draftPanels[idx], ...entry };
+    else draftPanels.push(entry);
+    savePanelsDraft();
+  }
+
+  function createUploadPanel({ sku, description, mockupPaths, competitorUrl, prefillTitle, prefillTags, prefillDescription }) {
+    const panel = document.createElement('div');
+    panel.className = 'upload-panel';
+    panel.style.cssText = 'margin-top:1rem;padding:1rem;border:1px solid var(--hair);border-radius:10px;background:rgba(255,255,255,0.02);';
+    panel.innerHTML = `
+      <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;font-weight:600;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Etsy'ye Yükle
+        <span style="font-size:0.7rem;opacity:0.55;font-weight:400;">${mockupPaths.length} mockup hazır</span>
+      </div>
+
+      <div style="margin-bottom:0.6rem;">
+        <div class="field-label" style="margin-bottom:0.25rem;">Rakip Linki <span style="font-weight:300;opacity:0.5">(opsiyonel — etiket + başlık çeker)</span></div>
+        <div style="display:flex;gap:0.4rem;">
+          <input type="text" data-role="competitor" value="${escapeAttr(competitorUrl || '')}" placeholder="https://www.etsy.com/listing/..." style="flex:1;">
+          <button type="button" class="btn-sm" data-role="scrape">Rakipten Çek</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom:0.6rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.25rem;">
+          <div class="field-label" style="margin:0">Başlık</div>
+          <button type="button" class="btn-sm" data-role="gen-title">AI ile Üret</button>
+        </div>
+        <input type="text" data-role="title" value="${escapeAttr(prefillTitle || description || '')}" placeholder="Listing başlığı" style="width:100%;">
+      </div>
+
+      <div style="margin-bottom:0.6rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.25rem;">
+          <div class="field-label" style="margin:0">Etiketler <span style="font-weight:300;opacity:0.5">(virgülle ayır, 13 adet)</span></div>
+          <button type="button" class="btn-sm" data-role="gen-tags">AI ile Üret</button>
+        </div>
+        <textarea data-role="tags" rows="2" placeholder="tag1, tag2, tag3, ..." style="width:100%;">${escapeHtml(prefillTags || '')}</textarea>
+      </div>
+
+      <div style="margin-bottom:0.6rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.25rem;">
+          <div class="field-label" style="margin:0">Açıklama</div>
+          <button type="button" class="btn-sm" data-role="gen-desc">AI ile Üret</button>
+        </div>
+        <textarea data-role="description" rows="6" placeholder="Listing açıklaması" style="width:100%;">${escapeHtml(prefillDescription || '')}</textarea>
+      </div>
+
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <button type="button" class="btn-primary btn-amber" data-role="upload">Etsy'ye Yükle →</button>
+        <span data-role="status" style="font-size:0.75rem;opacity:0.7;"></span>
+      </div>
+    `;
+
+    const $ = (sel) => panel.querySelector(sel);
+    const titleEl = $('[data-role=title]');
+    const tagsEl = $('[data-role=tags]');
+    const descEl = $('[data-role=description]');
+    const statusEl = $('[data-role=status]');
+    const uploadBtn = $('[data-role=upload]');
+    const competitorEl = $('[data-role=competitor]');
+
+    const saveThis = () => upsertDraftPanel({
+      sku, description, mockupPaths,
+      title: titleEl.value,
+      tags: tagsEl.value,
+      desc: descEl.value,
+      competitorUrl: competitorEl.value,
+    });
+    // Initial save when panel created
+    saveThis();
+    [titleEl, tagsEl, descEl, competitorEl].forEach(el => el && el.addEventListener('input', saveThis));
+
+    async function callJson(url, body) {
+      const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      if (!r.ok) {
+        let msg = 'HTTP ' + r.status;
+        try { const j = await r.json(); if (j.error) msg = j.error; } catch {}
+        throw new Error(msg);
+      }
+      return r.json();
+    }
+
+    $('[data-role=scrape]').addEventListener('click', async (e) => {
+      e.preventDefault();
+      const url = (competitorEl.value || '').trim();
+      if (!url) { statusEl.textContent = 'Rakip linki boş'; return; }
+      const btn = e.currentTarget; btn.disabled = true; const prev = btn.textContent; btn.textContent = '...';
+      statusEl.textContent = 'Rakipten çekiliyor...';
+      try {
+        const data = await callJson('/api/scrape-competitor-tags', { url });
+        if (Array.isArray(data.tags) && data.tags.length) tagsEl.value = data.tags.join(', ');
+        if (data.seoTitle) titleEl.value = data.seoTitle;
+        else if (data.title) titleEl.value = data.title;
+        statusEl.textContent = `Çekildi: ${data.tags?.length || 0} tag` + (data.seoTitle ? ' + SEO başlık' : '');
+      } catch (err) { statusEl.textContent = 'Rakipten çekilemedi: ' + err.message; }
+      finally { btn.disabled = false; btn.textContent = prev; }
+    });
+
+    $('[data-role=gen-title]').addEventListener('click', async (e) => {
+      e.preventDefault();
+      const btn = e.currentTarget; btn.disabled = true; const prev = btn.textContent; btn.textContent = '...';
+      try {
+        const tags = tagsEl.value.split(',').map(t => t.trim()).filter(Boolean);
+        const data = await callJson('/api/generate-title-ai', { title: titleEl.value || description, tags });
+        if (data.title) titleEl.value = data.title;
+      } catch (err) { statusEl.textContent = 'Başlık üretilemedi: ' + err.message; }
+      finally { btn.disabled = false; btn.textContent = prev; }
+    });
+
+    $('[data-role=gen-tags]').addEventListener('click', async (e) => {
+      e.preventDefault();
+      const btn = e.currentTarget; btn.disabled = true; const prev = btn.textContent; btn.textContent = '...';
+      try {
+        const data = await callJson('/api/generate-tags-ai', { title: titleEl.value || description });
+        if (Array.isArray(data.tags)) tagsEl.value = data.tags.join(', ');
+      } catch (err) { statusEl.textContent = 'Etiket üretilemedi: ' + err.message; }
+      finally { btn.disabled = false; btn.textContent = prev; }
+    });
+
+    $('[data-role=gen-desc]').addEventListener('click', async (e) => {
+      e.preventDefault();
+      const btn = e.currentTarget; btn.disabled = true; const prev = btn.textContent; btn.textContent = '...';
+      try {
+        const tags = tagsEl.value.split(',').map(t => t.trim()).filter(Boolean);
+        const data = await callJson('/api/generate-description-ai', { title: titleEl.value || description, tags });
+        if (data.description) descEl.value = data.description;
+      } catch (err) { statusEl.textContent = 'Açıklama üretilemedi: ' + err.message; }
+      finally { btn.disabled = false; btn.textContent = prev; }
+    });
+
+    uploadBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const title = titleEl.value.trim();
+      const tags = tagsEl.value.split(',').map(t => t.trim()).filter(Boolean);
+      const desc = descEl.value.trim();
+      if (!title) { statusEl.textContent = 'Başlık boş'; return; }
+      if (tags.length === 0) { statusEl.textContent = 'Etiket boş'; return; }
+      if (mockupPaths.length === 0) { statusEl.textContent = 'Mockup yok'; return; }
+
+      uploadBtn.disabled = true;
+      statusEl.textContent = 'Yükleniyor...';
+      try {
+        const resp = await fetch('/api/lifestyle-upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sku: sku || '',
+            title,
+            description: desc,
+            tags: tags.join(','),
+            mockups: mockupPaths.join(','),
+          }),
+        });
+        if (!resp.ok || !resp.body) throw new Error('HTTP ' + resp.status);
+
+        const reader = resp.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = '';
+        let listingUrl = '';
+        let errMsg = '';
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buf += decoder.decode(value, { stream: true });
+          const parts = buf.split('\n\n');
+          buf = parts.pop();
+          for (const part of parts) {
+            const line = part.split('\n').find(l => l.startsWith('data: '));
+            if (!line) continue;
+            let d; try { d = JSON.parse(line.slice(6)); } catch { continue; }
+            if (d.type === 'step-start') { statusEl.textContent = d.message || 'Yükleniyor...'; addLog('▶ ' + d.message); }
+            else if (d.type === 'step-done') { addLog('✓ ' + d.message); }
+            else if (d.type === 'step-error') { errMsg = d.message; addLog('✗ ' + d.message); }
+            else if (d.type === 'listingUrl') { listingUrl = d.url; }
+            else if (d.type === 'error') { errMsg = d.message; addLog('Hata: ' + d.message); }
+          }
+        }
+
+        if (listingUrl) {
+          statusEl.innerHTML = 'Yüklendi: <a href="' + listingUrl + '" target="_blank" style="color:var(--accent);">' + listingUrl.replace('https://www.etsy.com/listing/', '').slice(0, 40) + '</a>';
+          uploadBtn.textContent = 'Yüklendi ✓';
+        } else {
+          statusEl.textContent = 'Hata: ' + (errMsg || 'listing URL alınamadı');
+          uploadBtn.disabled = false;
+        }
+      } catch (err) {
+        statusEl.textContent = 'Hata: ' + err.message;
+        uploadBtn.disabled = false;
+      }
+    });
+
+    return panel;
+  }
+
+  function setProgress(pct, label) {
+    const bar = document.getElementById('progressBar');
+    const pctEl = document.getElementById('pipelinePct');
+    const lbl = document.getElementById('pipelineLabel');
+    if (bar) bar.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = pct + '%';
+    if (lbl && label) lbl.textContent = label;
+  }
+
+  function openProgress() {
+    const ps = document.getElementById('progress-section');
+    const rs = document.getElementById('results-section');
+    const ls = document.getElementById('log-section');
+    if (ps) { ps.style.display = 'block'; ps.classList.add('active'); }
+    if (rs) { rs.style.display = 'block'; rs.classList.add('active'); }
+    if (ls) {
+      ls.classList.add('active');
+      const det = ls.querySelector('details');
+      if (det) det.open = true;
+    }
+  }
+
+  // ── Bulk rows ──
+  let bulkSeq = 0;
+  window.addBulkRow = function addBulkRow() {
+    bulkSeq++;
+    const wrap = document.createElement('div');
+    wrap.className = 'form-section bulk-row';
+    wrap.dataset.seq = bulkSeq;
+    wrap.style.cssText = 'padding:12px;margin-bottom:10px;';
+    wrap.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span class="bulk-item-num" style="font-weight:700;color:var(--amber);">#<span data-role="num">${bulkSeq}</span></span>
+        <span class="bulk-item-status" data-role="status" style="flex:1;color:var(--text-dim);font-size:0.7rem;">hazır</span>
+        <button type="button" class="btn-sm" data-role="remove" style="padding:3px 9px;font-size:0.65rem;">Kaldır</button>
+      </div>
+      <div class="drop-grid">
+        <div>
+          <div class="field-label">Ürün Fotoğrafı</div>
+          <div class="drop-zone" data-role="drop">
+            <input type="file" accept="image/*" data-role="file">
+            <div class="dz-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+            <div class="dz-label">Sürükle veya tıkla</div>
+            <div class="dz-files" data-role="files"></div>
+          </div>
+        </div>
+        <div>
+          <div class="field-label">Açıklama</div>
+          <textarea data-role="desc" placeholder="Örn: duvara asılan çiçek desenli kanvas tablo" rows="5"></textarea>
+        </div>
+      </div>
+    `;
+    document.getElementById('bulkItems').appendChild(wrap);
+
+    const fileInput = wrap.querySelector('[data-role=file]');
+    const dropEl = wrap.querySelector('[data-role=drop]');
+    const filesEl = wrap.querySelector('[data-role=files]');
+    const removeBtn = wrap.querySelector('[data-role=remove]');
+
+    dropEl.addEventListener('click', (e) => { if (e.target === dropEl || e.target.closest('.dz-icon') || e.target.closest('.dz-label')) fileInput.click(); });
+    fileInput.addEventListener('change', () => {
+      const f = fileInput.files[0];
+      filesEl.innerHTML = f ? `<div style="color:var(--text);">${escapeHtml(f.name)}</div>` : '';
+    });
+    dropEl.addEventListener('dragover', (e) => { e.preventDefault(); dropEl.classList.add('dragover'); });
+    dropEl.addEventListener('dragleave', () => dropEl.classList.remove('dragover'));
+    dropEl.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropEl.classList.remove('dragover');
+      if (e.dataTransfer.files[0]) {
+        fileInput.files = e.dataTransfer.files;
+        fileInput.dispatchEvent(new Event('change'));
+      }
+    });
+    removeBtn.addEventListener('click', () => { wrap.remove(); renumberBulkRows(); });
+  };
+
+  function renumberBulkRows() {
+    document.querySelectorAll('.bulk-row').forEach((el, i) => {
+      const numEl = el.querySelector('[data-role=num]');
+      if (numEl) numEl.textContent = i + 1;
+    });
+  }
+
+  window.ensureBulkRowMin = function ensureBulkRowMin() {
+    const items = document.getElementById('bulkItems');
+    if (!items) return;
+    if (items.children.length === 0) { window.addBulkRow(); window.addBulkRow(); }
+  };
+
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'btnAddBulk') window.addBulkRow();
+  });
+
+  // ── Submit handler ──
   document.getElementById('createForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+    const btn = document.getElementById('btnCreate');
+    if (btn) btn.disabled = true;
 
-    // Resume mode: skip file validation, use existing mockups
-    if (window._resumeData) {
-      const rd = window._resumeData;
-      window._resumeData = null;
-
-      const fd = new FormData();
-      fd.append('mode', 'single');
-      fd.append('resumeFrom', 'tags');
-      fd.append('existingMockups', rd.mockups.join(','));
-      fd.append('sku', rd.sku);
-      const comp = document.getElementById('competitor').value.trim();
-      if (comp) fd.append('competitor', comp);
-      pipelineState.competitor = comp;
-      if (document.getElementById('fullAuto').checked) fd.append('fullAuto', '1');
-      if (document.getElementById('skipTags').checked) fd.append('skipTags', '1');
-
-      // Validate: warn if competitor is empty (tags won't be scraped)
-      if (!comp) {
-        addLog('UYARI: Rakip URL bos — tag cekilemeyecek. Lutfen rakip URL girin veya AI ile tag uretin.');
+    try {
+      if (currentMode === 'bulk') {
+        await runBulkSubmit();
+      } else {
+        await runSingleSubmit();
       }
-
-      // Prepare pipeline state
-      resetPipelineState();
-      pipelineState.mockupPaths = [...rd.mockups];
-      pipelineState.completedSteps = ['generate', 'mockup'];
-      if (rd.listingUrl) {
-        pipelineState.listingUrl = rd.listingUrl;
-        fd.append('existingListingUrl', rd.listingUrl);
-      }
-
-      document.getElementById('progress-section').classList.add('active');
-      renderSteps(STEPS);
-      setStep('generate', 'done', 'Tasarım hazır');
-      setStep('mockup', 'done', rd.mockups.length + ' mockup hazır');
-      updateProgress(2, STEPS.length);
-
-      addLog('── Önceki islemden devam ediliyor ──');
-      addLog(rd.mockups.length + ' mockup mevcut. Tags + Etsy + Pinterest basliyor...');
-
-      await runPipeline(fd, true);
-      return;
+    } finally {
+      if (btn) btn.disabled = false;
     }
-
-    if (currentMode === 'product-mockup') {
-      const productFiles = document.getElementById('productFiles').files;
-      if (productFiles.length === 0) { alert('En az 1 ürün fotografi yükleyin.'); return; }
-
-      const fd = new FormData();
-      fd.append('mode', 'product-mockup');
-      for (let i = 0; i < productFiles.length; i++) {
-        fd.append('productPhotos', productFiles[i]);
-      }
-      const count = document.getElementById('mockupCount2').value || '10';
-      fd.append('mockupCount', count);
-      const sku = document.getElementById('sku').value.trim();
-      if (sku) fd.append('sku', sku);
-      const competitor = document.getElementById('competitor').value.trim();
-      if (competitor) fd.append('competitor', competitor);
-      pipelineState.competitor = competitor;
-      if (document.getElementById('fullAuto').checked) fd.append('fullAuto', '1');
-      if (document.getElementById('skipTags').checked) fd.append('skipTags', '1');
-
-      await runPipeline(fd, false);
-      return;
-    }
-
-    if (currentMode === 'front-back') {
-      const front = document.getElementById('frontFile').files[0];
-      const back = document.getElementById('backFile').files[0];
-      if (!front || !back) { alert('Ön ve arka tasarım görsellerini yükleyin.'); return; }
-    } else {
-      const ref = document.getElementById('refFile').files[0];
-      if (!ref) { alert('Tasarım görseli yükleyin.'); return; }
-    }
-
-    const fd = new FormData();
-    fd.append('mode', currentMode);
-
-    if (currentMode === 'front-back') {
-      fd.append('ref', document.getElementById('frontFile').files[0]);
-      fd.append('backDesign', document.getElementById('backFile').files[0]);
-    } else {
-      fd.append('ref', document.getElementById('refFile').files[0]);
-    }
-
-    const mockups = document.getElementById('mockupFiles').files;
-    for (let i = 0; i < mockups.length; i++) {
-      fd.append('mockups', mockups[i]);
-    }
-    const libMockups = getSelectedLibraryMockups();
-    if (libMockups.length > 0) fd.append('libraryMockups', libMockups.join(','));
-
-    const sku = document.getElementById('sku').value.trim();
-    if (sku) fd.append('sku', sku);
-
-    const competitor = document.getElementById('competitor').value.trim();
-    if (competitor) fd.append('competitor', competitor);
-    pipelineState.competitor = competitor;
-
-    const prompt = document.getElementById('prompt').value.trim();
-    if (prompt) fd.append('prompt', prompt);
-
-    if (document.getElementById('fullAuto').checked) fd.append('fullAuto', '1');
-    if (document.getElementById('skipTags').checked) fd.append('skipTags', '1');
-
-    await runPipeline(fd, false);
   });
+
+  async function runSingleSubmit() {
+    const files = Array.from(document.getElementById('refFile').files);
+    const description = document.getElementById('productDesc').value.trim();
+    const sku = document.getElementById('sku').value.trim();
+    const count = parseInt(document.getElementById('mockupCount').value, 10) || 10;
+    const competitorUrl = (document.getElementById('competitorUrl')?.value || '').trim();
+
+    if (files.length === 0) { alert('Ürün fotoğrafı yükle.'); return; }
+    if (!description) { alert('Ürün açıklaması gir.'); return; }
+
+    const results = document.getElementById('results-section');
+    results.innerHTML = '';
+    document.getElementById('log').innerHTML = '';
+    draftPanels = [];
+    savePanelsDraft();
+    openProgress();
+    setProgress(0, 'Başlatılıyor…');
+
+    const block = createResultsBlock(description);
+    results.appendChild(block);
+    const grid = block.querySelector('.image-grid');
+    const countEl = block.querySelector('.results-block-count');
+    renderMockupTiles(grid, count);
+
+    let total = count;
+    let done = 0;
+
+    try {
+      await runLifestyleStream({
+        files, description, count, sku, competitorUrl,
+        onEvent: (d) => {
+          if (d.type === 'sku') addLog('SKU: ' + d.sku);
+          else if (d.type === 'log') addLog(d.message);
+          else if (d.type === 'step-start') { addLog('▶ ' + d.message); setProgress(0, d.message); }
+          else if (d.type === 'step-done') {
+            addLog('✓ ' + d.message);
+            if (d.concepts && Array.isArray(d.concepts)) { total = d.concepts.length; if (countEl) countEl.textContent = total; }
+          }
+          else if (d.type === 'mockup-start') setProgress(Math.round(done / total * 100), `Mockup ${d.idx}/${d.total}: ${(d.angle || '').slice(0,40)}`);
+          else if (d.type === 'mockup-done') {
+            updateMockupTile(grid, d.idx, 'done', d);
+            done++;
+            setProgress(Math.round(done / total * 100), `Mockup ${d.idx}/${d.total} hazır`);
+          }
+          else if (d.type === 'mockup-error') {
+            updateMockupTile(grid, d.idx, 'error', d);
+            done++;
+            setProgress(Math.round(done / total * 100));
+            addLog('✗ ' + d.idx + ': ' + d.error);
+          }
+          else if (d.type === 'tags' && Array.isArray(d.tags)) {
+            addLog('✓ Tag çekildi: ' + d.tags.length);
+            window._lastScrapedTags = d.tags;
+          }
+          else if (d.type === 'title' && d.title) {
+            addLog('✓ Başlık: ' + d.title.slice(0, 60));
+            window._lastScrapedTitle = d.title;
+          }
+          else if (d.type === 'description' && d.description) {
+            window._lastScrapedDescription = d.description;
+          }
+          else if (d.type === 'step-start' && d.step === 'tags') { addLog('▶ ' + d.message); setProgress(100, d.message); }
+          else if (d.type === 'step-done' && d.step === 'tags') { addLog('✓ ' + d.message); }
+          else if (d.type === 'step-error' && d.step === 'tags') { addLog('✗ ' + d.message); }
+          else if (d.type === 'done') {
+            setProgress(100, 'Tamamlandı');
+            addLog('✓ Tamamlandı: ' + d.count + ' mockup');
+            if (countEl) countEl.textContent = d.count;
+            if (Array.isArray(d.mockups) && d.mockups.length > 0) {
+              const panel = createUploadPanel({
+                sku: d.sku || sku,
+                description,
+                mockupPaths: d.mockups,
+                competitorUrl,
+                prefillTitle: d.scraped?.title || window._lastScrapedTitle || '',
+                prefillTags: (d.scraped?.tags || window._lastScrapedTags || []).join(', '),
+                prefillDescription: d.scraped?.description || window._lastScrapedDescription || '',
+              });
+              block.appendChild(panel);
+            }
+          }
+          else if (d.type === 'error') { setProgress(0, 'Hata'); addLog('Hata: ' + d.message); }
+        },
+      });
+    } catch (err) {
+      addLog('Bağlantı hatası: ' + err.message);
+      setProgress(0, 'Hata');
+    }
+  }
+
+  async function runBulkSubmit() {
+    const rows = [...document.querySelectorAll('.bulk-row')];
+    const jobs = rows.map(row => ({
+      row,
+      file: row.querySelector('[data-role=file]').files[0],
+      desc: row.querySelector('[data-role=desc]').value.trim(),
+      statusEl: row.querySelector('[data-role=status]'),
+    })).filter(j => j.file && j.desc);
+
+    if (jobs.length === 0) { alert('En az 1 ürün için hem fotoğraf hem açıklama gerekli.'); return; }
+
+    const count = parseInt(document.getElementById('bulkMockupCount').value, 10) || 10;
+    const totalMockups = jobs.length * count;
+    let overallDone = 0;
+
+    const results = document.getElementById('results-section');
+    results.innerHTML = '';
+    document.getElementById('log').innerHTML = '';
+    openProgress();
+    setProgress(0, `0/${jobs.length} ürün`);
+
+    for (let i = 0; i < jobs.length; i++) {
+      const j = jobs[i];
+      j.statusEl.textContent = 'çalışıyor…';
+
+      const block = createResultsBlock(`#${i + 1} — ${j.desc}`);
+      results.appendChild(block);
+      const grid = block.querySelector('.image-grid');
+      const countEl = block.querySelector('.results-block-count');
+      renderMockupTiles(grid, count);
+
+      let total = count;
+      try {
+        await runLifestyleStream({
+          file: j.file, description: j.desc, count,
+          onEvent: (d) => {
+            if (d.type === 'sku') addLog(`[#${i + 1}] SKU: ` + d.sku);
+            else if (d.type === 'log') addLog(`[#${i + 1}] ` + d.message);
+            else if (d.type === 'step-start') addLog(`[#${i + 1}] ▶ ` + d.message);
+            else if (d.type === 'step-done') {
+              addLog(`[#${i + 1}] ✓ ` + d.message);
+              if (d.concepts && Array.isArray(d.concepts)) { total = d.concepts.length; if (countEl) countEl.textContent = total; }
+            }
+            else if (d.type === 'mockup-done') {
+              updateMockupTile(grid, d.idx, 'done', d);
+              overallDone++;
+              setProgress(Math.round(overallDone / totalMockups * 100), `Ürün ${i + 1}/${jobs.length}: mockup ${d.idx}/${d.total}`);
+            }
+            else if (d.type === 'mockup-error') {
+              updateMockupTile(grid, d.idx, 'error', d);
+              overallDone++;
+              setProgress(Math.round(overallDone / totalMockups * 100));
+              addLog(`[#${i + 1}] ✗ ${d.idx}: ${d.error}`);
+            }
+            else if (d.type === 'done') {
+              j.statusEl.textContent = 'bitti — ' + d.count + ' mockup';
+              if (countEl) countEl.textContent = d.count;
+              if (Array.isArray(d.mockups) && d.mockups.length > 0) {
+                const panel = createUploadPanel({ sku: d.sku, description: j.desc, mockupPaths: d.mockups });
+                block.appendChild(panel);
+              }
+            }
+            else if (d.type === 'error') { j.statusEl.textContent = 'hata'; addLog(`[#${i + 1}] Hata: ` + d.message); }
+          },
+        });
+      } catch (err) {
+        j.statusEl.textContent = 'hata';
+        addLog(`[#${i + 1}] Bağlantı hatası: ` + err.message);
+      }
+    }
+
+    setProgress(100, `Tamamlandı — ${jobs.length} ürün`);
+    addLog('✓ Tüm ürünler işlendi');
+  }
 
   // ── Resume from where it left off ──
   window.resumePipeline = async function() {
