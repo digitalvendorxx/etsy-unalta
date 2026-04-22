@@ -147,8 +147,8 @@ if ($envHasPlaceholder) {
     Write-Host ""
 
     $gemini = Read-Host "GEMINI_API_KEY (Google Gemini / Imagen)"
-    $wiro = Read-Host "WIRO_API_KEY (alternatif, bos birak gecer)"
-    $openrouter = Read-Host "OPENROUTER_API_KEY (SEO/tags icin)"
+    $wiro = Read-Host "WIRO_API_KEY (opsiyonel, bos birak gecer)"
+    $openrouter = Read-Host "OPENROUTER_API_KEY (opsiyonel, bos birak gecer)"
 
     $envLines = @()
     if ($gemini)     { $envLines += "GEMINI_API_KEY=$gemini" }     else { $envLines += "GEMINI_API_KEY=your_gemini_api_key_here" }
@@ -159,8 +159,8 @@ if ($envHasPlaceholder) {
     $envLines -join "`r`n" | Set-Content -Encoding UTF8 $envPath
     Write-Host "   .env yazildi" -ForegroundColor Green
 
-    if (-not $gemini -or -not $openrouter) {
-        Write-Host "   UYARI: Eksik key var, server calismayabilir. Sonra notepad ile ac: $envPath" -ForegroundColor Yellow
+    if (-not $gemini) {
+        Write-Host "   UYARI: GEMINI_API_KEY eksik, tasarim uretimi calismaz. Sonra notepad ile ac: $envPath" -ForegroundColor Yellow
     }
 }
 
