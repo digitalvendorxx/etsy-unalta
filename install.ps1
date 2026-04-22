@@ -132,7 +132,7 @@ $envPath = Join-Path $TARGET ".env"
 $envHasPlaceholder = $false
 if (Test-Path $envPath) {
     $envContent = Get-Content $envPath -Raw
-    if ($envContent -match "your_" -or $envContent -match "^\s*GEMINI_API_KEY\s*=\s*$") {
+    if ($envContent -match "your_" -or $envContent -match "^\s*OPENROUTER_API_KEY\s*=\s*$") {
         $envHasPlaceholder = $true
     }
 } else {
@@ -146,21 +146,22 @@ if ($envHasPlaceholder) {
     Write-Host "Bos birakirsan .env'i sonradan elle doldurmalisin."
     Write-Host ""
 
-    $gemini = Read-Host "GEMINI_API_KEY (Google Gemini / Imagen)"
-    $wiro = Read-Host "WIRO_API_KEY (opsiyonel, bos birak gecer)"
-    $openrouter = Read-Host "OPENROUTER_API_KEY (opsiyonel, bos birak gecer)"
+    $openrouter = Read-Host "OPENROUTER_API_KEY (ZORUNLU - image+llm+vision hepsi)"
+    $wiro = Read-Host "WIRO_API_KEY (opsiyonel image fallback, bos birak gecer)"
 
     $envLines = @()
-    if ($gemini)     { $envLines += "GEMINI_API_KEY=$gemini" }     else { $envLines += "GEMINI_API_KEY=your_gemini_api_key_here" }
-    if ($wiro)       { $envLines += "WIRO_API_KEY=$wiro" }         else { $envLines += "WIRO_API_KEY=your_wiro_api_key_here" }
     if ($openrouter) { $envLines += "OPENROUTER_API_KEY=$openrouter" } else { $envLines += "OPENROUTER_API_KEY=your_openrouter_api_key_here" }
+    if ($wiro)       { $envLines += "WIRO_API_KEY=$wiro" }             else { $envLines += "WIRO_API_KEY=your_wiro_api_key_here" }
     $envLines += "PORT=3000"
 
     $envLines -join "`r`n" | Set-Content -Encoding UTF8 $envPath
     Write-Host "   .env yazildi" -ForegroundColor Green
 
-    if (-not $gemini) {
-        Write-Host "   UYARI: GEMINI_API_KEY eksik, tasarim uretimi calismaz. Sonra notepad ile ac: $envPath" -ForegroundColor Yellow
+    if (-not $openrouter -and -not $wiro) {
+        Write-Host "   UYARI: Hicbir API key girilmedi. Server calisir ama tasarim/tag uretimi patlar." -ForegroundColor Yellow
+        Write-Host "   Sonra notepad ile ac: $envPath" -ForegroundColor Yellow
+    } elseif (-not $openrouter) {
+        Write-Host "   UYARI: OPENROUTER_API_KEY yok. Vision (mockup analiz) ve LLM (tag/title) calismaz." -ForegroundColor Yellow
     }
 }
 

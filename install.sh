@@ -73,7 +73,7 @@ Klasor: $TARGET_DIR
 SIRAYLA:
   1. .env dosyasini ac, API key'leri doldur:
        $TARGET_DIR/.env
-     ( GEMINI_API_KEY / WIRO_API_KEY + OPENROUTER_API_KEY )
+     ( OPENROUTER_API_KEY zorunlu, WIRO_API_KEY opsiyonel fallback )
 
   2. CDP browser ac (etsy + pinterest login icin):
        cd "$TARGET_DIR" && ./start-browser.sh
